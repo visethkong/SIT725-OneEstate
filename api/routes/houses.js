@@ -1,63 +1,23 @@
 import express from "express";
+import {createHouse, deleteHouse, getHouse, getHouses, updateHouse } from "../controllers/house.js";
 import House from "../models/House.js";
+import { createError } from "../utils/error.js";
 
 const router = express.Router();
 
 //CREATE
-router.post("/", async (req,res)=>{
+router.post("/", createHouse);
     
-    const newHouse = new House(req.body)
-    
-    try{
-        const savedHouse = await newHouse.save()
-        res.status(200).json(savedHouse)
-    }catch(err){
-        res.status(500), json(err)
-    }
-});
-
 //UPDATE
-router.put("/:id", async (req,res)=>{
-        
-    try{
-        const updatedHouse = await House.findByIdAndUpdate(req.params.id, { $set: req.body}, { new: true})
-        res.status(200).json(updatedHouse)
-    }catch(err){
-        res.status(500), json(err)
-    }
-});
+router.put("/:id", updateHouse);
 
 //DELETE
-router.delete("/:id", async (req,res)=>{
-        
-    try{
-        await House.findByIdAndDelete(req.params.id);
-        res.status(200).json("House has been deleted.")
-    }catch(err){
-        res.status(500), json(err)
-    }
-});
+router.delete("/:id", deleteHouse);
 
 //GET
-router.get("/:id", async (req,res)=>{
-        
-    try{
-        const house = await House.findById(req.params.id);
-        res.status(200).json(house)
-    }catch(err){
-        res.status(500), json(err)
-    }
-});
+router.get("/:id", getHouse);
 
 //GET ALL
-router.get("/", async (req,res)=>{
-        
-    try{
-        const houses = await House.find();
-        res.status(200).json(houses)
-    }catch(err){
-        res.status(500), json(err)
-    }
-});
+router.get("/", getHouses);
 
 export default router
