@@ -1,18 +1,24 @@
 import express from "express";
-import {createHouse, deleteHouse, getHouse, getHouses, updateHouse } from "../controllers/house.js";
+import {
+  createHouse,
+  deleteHouse,
+  getHouse,
+  getHouses,
+  updateHouse,
+} from "../controllers/house.js";
 import House from "../models/House.js";
-import { createError } from "../utils/error.js";
+import {verifyAdmin} from "../utils/verifyToken.js"
 
 const router = express.Router();
 
 //CREATE
-router.post("/", createHouse);
-    
+router.post("/", verifyAdmin, createHouse);
+
 //UPDATE
-router.put("/:id", updateHouse);
+router.put("/:id", verifyAdmin, updateHouse);
 
 //DELETE
-router.delete("/:id", deleteHouse);
+router.delete("/:id", verifyAdmin, deleteHouse);
 
 //GET
 router.get("/:id", getHouse);
@@ -20,4 +26,4 @@ router.get("/:id", getHouse);
 //GET ALL
 router.get("/", getHouses);
 
-export default router
+export default router;
