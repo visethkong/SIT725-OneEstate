@@ -14,3 +14,11 @@ Step 4: to start api using 'yarn start'
 
 
 
+Color: 
+#1C6758
+#3D8361
+#D6CDA4
+#EEF2E6
+#FF6E31
+
+
