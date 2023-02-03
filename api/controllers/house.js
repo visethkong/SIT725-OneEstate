@@ -44,8 +44,12 @@ export const getHouse = async (req, res, next) => {
 };
 
 export const getHouses = async (req, res, next) => {
+  const { min, max, ...others } = req.query;
   try {
-    const houses = await House.find();
+    const houses = await House.find({
+      ...others,
+      cheapestPrice: { $gt: min | 1, $lt: max || 999 },
+    }).limit(req.query.limit);
     res.status(200).json(houses);
   } catch (err) {
     next(err);
