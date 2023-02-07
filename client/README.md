@@ -1,6 +1,8 @@
 # SIT725-OneEstate
 # Getting Started with App Frontend
 
-Step 1: To install dependencies using 'yarn install'
+Step 1: install all the dependencies, you can use:
+`yarn install`
 
-Step 2: to start project using 'yarn start'
+Step 2: to run the client website, you can use:
+`yarn start`
